@@ -3,3 +3,4 @@ Hello AWS
 Triggering AWS after adding secrets
 Run workflow again
 Trigger workflow with secrets added
+Trigger workflow with active AWS key
