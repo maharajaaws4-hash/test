@@ -22,11 +22,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
 
-      - name: Debug secrets
-        run: |
-          echo "AWS_ACCESS_KEY_ID is: $AWS_ACCESS_KEY_ID"
-          echo "AWS_SECRET_ACCESS_KEY length is: ${#AWS_SECRET_ACCESS_KEY}"
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
-      - name: Verify AWS identity
-        run: aws sts get-caller-identity
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
