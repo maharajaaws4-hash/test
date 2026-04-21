@@ -1,3 +1,10 @@
+name: Deploy on Merge
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,7 +22,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
 
-      # 👇 Add this step here
       - name: Debug secrets
         run: |
           echo "AWS_ACCESS_KEY_ID is: $AWS_ACCESS_KEY_ID"
