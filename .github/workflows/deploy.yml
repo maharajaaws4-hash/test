@@ -30,12 +30,3 @@ jobs:
       - name: Verify AWS identity
         run: aws sts get-caller-identity
 
-      - name: Launch EC2 instance
-        run: |
-          aws ec2 run-instances \
-            --image-id ami-0f8d4f93ed5c8a53b \  # Valid AMI in ap-south-1
-            --count 1 \
-            --instance-type t2.micro \
-            --key-name my-key \
-            --security-groups my-security-group
-
