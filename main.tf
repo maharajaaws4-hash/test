@@ -2,13 +2,11 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-# Create a new key pair
 resource "aws_key_pair" "my_key" {
   key_name   = "my-key"
-  public_key = file("/c/Users/acer/.ssh/id_rsa.pub")  # path to your local public key
+  public_key = file("${path.module}/key/my-key.pub")
 }
 
-# Create a new security group
 resource "aws_security_group" "my_sg" {
   name        = "my-sg"
   description = "Allow SSH and HTTP"
@@ -35,9 +33,17 @@ resource "aws_security_group" "my_sg" {
   }
 }
 
-# Create the EC2 instance
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"]
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+}
+
 resource "aws_instance" "ubuntu_vm" {
-  ami           = "ami-00111452cb3c5dda0" # Ubuntu AMI in ap-south-1
+  ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   key_name      = aws_key_pair.my_key.key_name
   vpc_security_group_ids = [aws_security_group.my_sg.id]
