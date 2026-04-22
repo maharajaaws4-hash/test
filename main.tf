@@ -43,9 +43,3 @@ resource "aws_instance" "ubuntu_vm" {
   key_name      = "my-key"  # reference the AWS-created key pair
   vpc_security_group_ids = [aws_security_group.my_sg.id]
 }
-
-
-
-
-
-
