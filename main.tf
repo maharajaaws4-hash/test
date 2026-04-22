@@ -113,6 +113,7 @@ data "aws_ami" "ubuntu" {
 # EC2 Instance
 # -------------------------
 resource "aws_instance" "ubuntu_vm" {
+  count         = 2
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   key_name      = "my-key"
