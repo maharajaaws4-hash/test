@@ -125,3 +125,4 @@ resource "aws_instance" "ubuntu_vm" {
     Name = "ubuntu-vm"
   }
 }
+
